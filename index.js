@@ -3,12 +3,12 @@ const app = express();
 const axios = require("axios");
 
 
-function generateRandomString() {
+function generateRandomString(length) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'; // Base64 character set
     const result = [];
     const charactersLength = characters.length;
     
-    for (let i = 0; i < 832; i++) {
+    for (let i = 0; i < length; i++) {
       result.push(characters.charAt(Math.floor(Math.random() * charactersLength)));
     }
     
@@ -34,7 +34,7 @@ app.get('/sendotp', async (req, res) => {
             data: `scope=smsotp&client_id=6E6CwTkp8H1CyQxraPmcEJPQ7xka&msisdn=213${num}`,
             headers: { 
                 "content-type":"application/x-www-form-urlencoded",
-                "x-csrf-token": generateRandomString()
+                "x-csrf-token": generateRandomString(748)
             },
         });
         res.json(response.data);
@@ -53,7 +53,7 @@ app.get('/verifyotp', async (req, res) => {
             data: `scope=openid&client_secret=MVpXHW_ImuMsxKIwrJpoVVMHjRsa&client_id=6E6CwTkp8H1CyQxraPmcEJPQ7xka&otp=${otp}&mobileNumber=213${num}&grant_type=mobile`,
             headers: { 
                 "content-type":"application/x-www-form-urlencoded",
-                "x-csrf-token": generateRandomString()
+                "x-csrf-token": generateRandomString(748)
              },
           });
 
@@ -73,7 +73,7 @@ app.get('/2g', async (req, res) => {
             data: {"data":{"id":"GIFTWALKWIN","type":"products","meta":{"services":{"steps":10000,"code":"GIFTWALKWIN2GO","id":"WALKWIN"}}}},
             headers: { 
                 'Authorization': `Bearer ${token}`,
-                "x-csrf-token": generateRandomString()
+                "x-csrf-token": generateRandomString(832)
              },
           });
 
