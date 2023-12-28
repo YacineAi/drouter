@@ -32,10 +32,7 @@ app.get('/sendotp', async (req, res) => {
             method: "post",
             url: "https://apim.djezzy.dz/oauth2/registration",
             data: `scope=smsotp&client_id=6E6CwTkp8H1CyQxraPmcEJPQ7xka&msisdn=213${num}`,
-            headers: { 
-                "content-type":"application/x-www-form-urlencoded",
-                "x-csrf-token": generateRandomString(748)
-            },
+            headers: { "content-type":"application/x-www-form-urlencoded" }
         });
         res.json(response.data);
     } catch (error) {
@@ -51,10 +48,7 @@ app.get('/verifyotp', async (req, res) => {
             method: "post",
             url: "https://apim.djezzy.dz/oauth2/token",
             data: `scope=openid&client_secret=MVpXHW_ImuMsxKIwrJpoVVMHjRsa&client_id=6E6CwTkp8H1CyQxraPmcEJPQ7xka&otp=${otp}&mobileNumber=213${num}&grant_type=mobile`,
-            headers: { 
-                "content-type":"application/x-www-form-urlencoded",
-                "x-csrf-token": generateRandomString(748)
-             },
+            headers: { "content-type":"application/x-www-form-urlencoded" }
           });
 
         res.json(response.data);
@@ -71,10 +65,7 @@ app.get('/2g', async (req, res) => {
             method: "post",
             url: `https://apim.djezzy.dz/djezzy-api/api/v1/subscribers/213${num}/subscription-product?include=`,
             data: {"data":{"id":"GIFTWALKWIN","type":"products","meta":{"services":{"steps":10000,"code":"GIFTWALKWIN2GO","id":"WALKWIN"}}}},
-            headers: { 
-                'Authorization': `Bearer ${token}`,
-                "x-csrf-token": generateRandomString(832)
-             },
+            headers: { 'Authorization': `Bearer ${token}` }
           });
 
         res.json(response.data);
